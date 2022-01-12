@@ -1,0 +1,24 @@
+name: terraform-format
+on:
+  push:
+    branches-ignore:
+      - "main"
+
+jobs:
+  check-terraform-linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v2
+      - name: asdf_install
+        uses: asdf-vm/actions/install@v1
+      - name: Check Terraform Linting
+        run: |
+          terraform fmt -check -recursive
+          result=$?;
+          if (( $result == 0 )); then
+            exit 0;
+          else
+            echo '::error::Terraform code was not formatted/linted.';
+            exit 1;
+          fi

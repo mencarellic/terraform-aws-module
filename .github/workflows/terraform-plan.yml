@@ -1,0 +1,25 @@
+name: terraform-plan-with-localstack
+on:
+  push:
+    branches-ignore:
+      - "main"
+
+jobs:
+  terraform-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v2
+      - name: asdf_install
+        uses: asdf-vm/actions/install@v1
+      - name: Start LocalStack
+        run: |
+          pip install localstack
+          docker pull localstack/localstack
+          localstack start -d
+          echo "Waiting for LocalStack startup..."
+          localstack wait -t 30
+      - name: Run Terraform Plan
+        run: |
+          terraform -chdir=tests init
+          terraform -chdir=tests plan
