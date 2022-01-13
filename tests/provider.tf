@@ -30,6 +30,7 @@ provider "aws" {
     firehose       = "http://localhost:4566"
     iam            = "http://localhost:4566"
     kinesis        = "http://localhost:4566"
+    kms            = "http://localhost:4566"
     lambda         = "http://localhost:4566"
     rds            = "http://localhost:4566"
     redshift       = "http://localhost:4566"
