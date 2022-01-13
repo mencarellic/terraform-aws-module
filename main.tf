@@ -32,7 +32,7 @@ resource "aws_s3_bucket_ownership_controls" "this" {
 }
 
 resource "aws_s3_bucket_object" "this" {
-  bucket                 = module.this.bucket.id
+  bucket                 = aws_s3_bucket.this.bucket.id
   acl                    = "private"
   key                    = "directory/"
   server_side_encryption = "aws:kms"
