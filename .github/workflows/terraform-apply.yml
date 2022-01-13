@@ -23,3 +23,4 @@ jobs:
         run: |
           terraform -chdir=tests init
           terraform -chdir=tests plan
+          terraform -chdir=tests apply -auto-approve
