@@ -1,0 +1,16 @@
+name: terraform-validate
+on:
+  push:
+    branches-ignore:
+      - "main"
+
+jobs:
+  terraform-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v2
+      - name: Run Terraform Validate
+        run: |
+          terraform -chdir=tests init
+          terraform -chdir=tests validate
