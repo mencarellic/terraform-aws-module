@@ -31,6 +31,13 @@ resource "aws_s3_bucket_ownership_controls" "this" {
   }
 }
 
+resource "aws_s3_bucket_object" "this" {
+  bucket                 = aws_s3_bucket.this.arn
+  acl                    = "private"
+  key                    = "directory/"
+  server_side_encryption = "aws:kms"
+}
+
 resource "aws_kms_alias" "this" {
   name          = "alias/${var.bucket.name}"
   target_key_id = aws_kms_key.this.id
